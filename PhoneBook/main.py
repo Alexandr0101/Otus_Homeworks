@@ -1,16 +1,32 @@
-# This is a sample Python script.
+from functions import open_file, open_and_save
 
-# Press ⌃R to execute it or replace it with your code.
-# Press Double ⇧ to search everywhere for classes, files, tool windows, actions, and settings.
-
-
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press ⌘F8 to toggle the breakpoint.
-
-
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+while True:
+    response_num = int(input("""Привет:) Добро пожаловать в телефонный справочник!
+    Показать все контакты -> введи 1: 
+    Создать контакт -> введи 2: 
+    Найти контакт -> введи 3:  
+    Изменить контакт -> введи 4:  
+    Удалить контакт -> введи 5: 
+    Открыть файл -> введи 6: 
+    Сохранить файл -> введи 7: 
+    Для выхода -> введи 8: 
+    """))
+    if response_num == 8:
+        print('Пока')
+        break
+    elif response_num == 1:
+        pass
+    elif response_num == 2:
+        pass
+    elif response_num == 3:
+        pass
+    elif response_num == 4:
+        pass
+    elif response_num == 5:
+        pass
+    elif response_num == 6:
+        open_file()
+    elif response_num == 7:
+        result = open_and_save()
+        if result == 'Success':
+            print('Файл успешно сохранён\n')
