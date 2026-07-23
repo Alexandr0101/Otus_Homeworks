@@ -1,5 +1,5 @@
-from functions import open_file, open_and_save, check_input, is_contact_in_contacts, add_contact
-
+from functions import (add_contact,check_lastname, check_firstname,
+                       check_phone_num, is_contact_in_contacts)
 while True:
     response_num = int(input("""Привет:) Добро пожаловать в телефонный справочник!
     Показать все контакты -> введи 1: 
@@ -16,70 +16,27 @@ while True:
         break
     elif response_num == 1:
         print(open_file())
-        from functions import add_contact, check_input, is_contact_in_contacts
+    elif response_num == 2:
+        lastname = check_lastname()
+        if lastname == None:
+            continue
+        firstname = check_firstname()
 
-        while True:
-            response_num = int(input("""Привет:) Добро пожаловать в телефонный справочник!
-            Показать все контакты -> введи 1: 
-            Создать контакт -> введи 2: 
-            Найти контакт -> введи 3:  
-            Изменить контакт -> введи 4:  
-            Удалить контакт -> введи 5: 
-            Открыть файл -> введи 6: 
-            Сохранить файл -> введи 7: 
-            Для выхода -> введи 8: 
-            """))
-            if response_num == 8:
-                print('Пока')
-                break
-            elif response_num == 2:
-                while True:
-                    last_name = input('Введи фамилию или 1 для выхода: ')
-                    if last_name == '1':
-                        break
-                    check_last_name = check_input(last_name=last_name)
-                    if not check_last_name:
-                        print('Фамилия должна состоять только из букв')
-                        while True:
-                            last_name = input('Введи фамилию или 1 для выхода: ')
-                            if last_name == '1':
-                                break
-                            if not check_input(last_name=last_name):
-                                continue
-                            if check_input(last_name=last_name):
-                                break
-                    first_name = input('Введи имя или 1 для выхода: ')
-                    if first_name == '1':
-                        break
-                    check_first_name = check_input(first_name=first_name)
-                    if not first_name:
-                        print('Фамилия должна состоять только из букв.')
-                        while True:
-                            first_name = input('Введи имя или 1 для выхода: ')
-                            if first_name == '1':
-                                break
-                            if not check_input(first_name=first_name):
-                                continue
-                            if check_input(first_name=first_name):
-                                break
-                    check_contact = is_contact_in_contacts(last_name, first_name)
-                    if check_contact:
-                        print(f'Контакт {last_name} {first_name} уже существует')
-                    phone_num = input('Введи номер телефона или 1 для выхода: ')
-                    if phone_num == '1':
-                        break
-                    if not phone_num:
-                        print('Номер телефона должен состоять только из цифр')
-                        while True:
-                            phone_num = input('Введи номер телефона или 1 для выхода: ')
-                            if phone_num == '1':
-                                break
-                            if not check_input(phone_num=phone_num):
-                                continue
-                            if check_input(phone_num=phone_num):
-                                break
-                    result = add_contact(last_name, first_name, phone_num)
-                    print(f'Контакт {last_name} {first_name} успешно добавлен')
+        if firstname == None:
+            continue
+
+        check_contact = is_contact_in_contacts(lastname, firstname)
+        if check_contact == True:
+            print(f'Контакт {lastname} {firstname} уже существует')
+            continue
+
+        phonenum = check_phone_num()
+        if phonenum == None:
+            continue
+
+        result = add_contact(lastname, firstname, phonenum)
+        print(f'Контакт {lastname} {firstname} успешно добавлен')
+
     elif response_num == 3:
         pass
     elif response_num == 4:
