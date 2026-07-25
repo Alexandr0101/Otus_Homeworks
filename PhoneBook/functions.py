@@ -41,7 +41,7 @@ def check_firstname() -> str | None:
 
 def check_phone_num() -> str | None:
     while True:
-        phone_num = input('Введи имя или 1 для выхода')
+        phone_num = input('Введи номер телефона или 1 для выхода')
 
         if phone_num == '1':
             return None
@@ -54,12 +54,20 @@ def check_phone_num() -> str | None:
 
 def is_contact_in_contacts(lastname: str, firstname: str) -> bool:
     with open('/Users/alex/OTUS/Homeworks/PhoneBook/Contacts.txt') as f:
+            for i in f:
+                if lastname in i.split() and firstname in i.split():
+                    return True
+            return False
+
+def get_contact(lastname : str, firstname: str,) -> [str]:
+    with open('/Users/alex/OTUS/Homeworks/PhoneBook/Contacts.txt') as f:
+        count = 0
+        contacts = []
         for i in f:
-
             if lastname in i.split() and firstname in i.split():
-                return True
-
-        return False
+                count += 1
+                contacts.append(f'{count}: {i}\n')
+    return contacts
 
 def add_contact(last_name: str, first_name: str, phone_num: str):
     file = open_file()

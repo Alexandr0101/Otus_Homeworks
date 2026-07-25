@@ -1,5 +1,5 @@
-from functions import (add_contact,check_lastname, check_firstname,
-                       check_phone_num, is_contact_in_contacts)
+from functions import (open_file, open_and_save, add_contact,check_lastname, check_firstname,
+                       check_phone_num, is_contact_in_contacts, get_contact)
 while True:
     response_num = int(input("""Привет:) Добро пожаловать в телефонный справочник!
     Показать все контакты -> введи 1: 
@@ -17,12 +17,13 @@ while True:
     elif response_num == 1:
         print(open_file())
     elif response_num == 2:
-        lastname = check_lastname()
-        if lastname == None:
-            continue
-        firstname = check_firstname()
 
-        if firstname == None:
+        lastname = check_lastname()
+        if lastname is None:
+            continue
+
+        firstname = check_firstname()
+        if firstname is None:
             continue
 
         check_contact = is_contact_in_contacts(lastname, firstname)
@@ -31,14 +32,23 @@ while True:
             continue
 
         phonenum = check_phone_num()
-        if phonenum == None:
+        if phonenum is None:
             continue
 
         result = add_contact(lastname, firstname, phonenum)
         print(f'Контакт {lastname} {firstname} успешно добавлен')
 
     elif response_num == 3:
-        pass
+        lastname = check_lastname()
+        if lastname is None:
+            continue
+
+        firstname = check_firstname()
+        if firstname is None:
+            continue
+
+        print(get_contact(lastname, firstname))
+
     elif response_num == 4:
         pass
     elif response_num == 5:
