@@ -76,3 +76,39 @@ def add_contact(last_name: str, first_name: str, phone_num: str):
         f.writelines(file)
 
 
+def get_contacts_and_indexes():
+    result = open_file()
+    for index, line in enumerate(result):
+        print(index, line)
+    while True:
+        check_num = input('Введи номер строки или q для выхода: ')
+        if check_num == 'q':
+            return None
+        if not check_num.isdigit():
+            print('Номер строки должен состоять только из цифр!')
+            continue
+        if int(check_num) > len(result)-1:
+            print(f'Номера строки {check_num} не существует!')
+            continue
+        break
+    lastname = check_lastname()
+    if lastname is None:
+        return None
+
+    firstname = check_firstname()
+    if firstname is None:
+        return None
+
+    phone_num = check_phone_num()
+    if phone_num is None:
+        return None
+
+    result[int(check_num)] = f'{lastname} {firstname} {phone_num}\n'
+    with open('/Users/alex/OTUS/Homeworks/PhoneBook/Contacts.txt', 'w') as f:
+        f.writelines(result)
+    return result[int(check_num)]
+
+
+
+
+
