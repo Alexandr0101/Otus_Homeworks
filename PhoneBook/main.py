@@ -1,5 +1,6 @@
-from functions import (open_file, open_and_save, add_contact,check_lastname, check_firstname,
-                       check_phone_num, is_contact_in_contacts, get_contact, get_contacts_and_indexes)
+from functions import (open_file, open_and_save, add_contact, check_lastname, check_firstname,
+                       check_phone_num, is_contact_in_contacts, get_contact, get_contacts_and_indexes, delete_contact)
+
 while True:
     response_num = int(input("""Привет:) Добро пожаловать в телефонный справочник!
     Показать все контакты -> введи 1: 
@@ -57,7 +58,11 @@ while True:
         print(f'Контакт изменён на {show_contacts}')
 
     elif response_num == 5:
-        pass
+        deleted_contact = delete_contact()
+        if deleted_contact is None:
+            continue
+
+        print(deleted_contact)
     elif response_num == 6:
         open_file()
     elif response_num == 7:
