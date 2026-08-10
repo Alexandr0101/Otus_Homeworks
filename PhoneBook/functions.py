@@ -4,13 +4,6 @@ def open_file() -> list[str]:
         f.seek(0)
         return f.readlines()
 
-def open_and_save() -> str:
-    """open and rewrite existing file"""
-    contact_data = open_file()
-    with open('/Users/alex/OTUS/Homeworks/PhoneBook/Contacts.txt', 'w') as f:
-        f.writelines(contact_data)
-        return 'Success'
-
 def check_lastname() -> str | None:
     while True:
         lastname = input('Введи фамилию или 1 для выхода')
@@ -52,20 +45,20 @@ def check_phone_num() -> str | None:
         return phone_num
 
 def is_contact_in_contacts(lastname: str, firstname: str) -> bool:
-    with open('/Users/alex/OTUS/Homeworks/PhoneBook/Contacts.txt') as f:
-            for i in f:
-                if lastname in i.split() and firstname in i.split():
-                    return True
-            return False
+    contacts = open_file()
+    for i in contacts:
+        if lastname in i.split() and firstname in i.split():
+            return True
+    return False
 
 def get_contact(lastname : str, firstname: str,) -> [str]:
-    with open('/Users/alex/OTUS/Homeworks/PhoneBook/Contacts.txt') as f:
-        count = 0
-        contacts = []
-        for i in f:
-            if lastname in i.split() and firstname in i.split():
-                count += 1
-                contacts.append(f'{count}: {i}\n')
+    contacts_list = open_file()
+    count = 0
+    contacts = []
+    for i in contacts_list:
+        if lastname in i.split() and firstname in i.split():
+            count += 1
+            contacts.append(f'{count}: {i}\n')
     return contacts
 
 def add_contact(last_name: str, first_name: str, phone_num: str):
