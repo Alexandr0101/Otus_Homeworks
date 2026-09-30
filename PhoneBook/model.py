@@ -1,5 +1,3 @@
-import os
-
 def open_file() -> list[str]:
     """open file or create and open file"""
     with open('/Users/alex/OTUS/Homeworks/PhoneBook/Contacts.txt', 'a+') as f:

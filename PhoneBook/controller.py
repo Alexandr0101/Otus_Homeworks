@@ -1,3 +1,6 @@
+from view import (check_lastname, check_firstname, check_phone_num)
+from model import (open_file, is_contact_in_contacts, get_contact, add_contact, get_contacts_and_indexes, delete_contact)
+
 while True:
 
     if not response_num.isdigit():
