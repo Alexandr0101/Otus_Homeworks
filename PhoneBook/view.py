@@ -1,5 +1,9 @@
-def get_responce_num() -> str:
+
+
+
+def get_response_num() -> str:
     """Выводит главное меню в консоль и возвращает значение от пользователя"""
+
     response_num = input("""Привет:) Добро пожаловать в телефонный справочник!
     Показать все контакты -> введи 1: 
     Создать контакт -> введи 2: 
@@ -9,6 +13,12 @@ def get_responce_num() -> str:
     Для выхода -> введи 6: 
     """)
     return response_num
+
+
+def show_notification(result: str) -> str:
+    """Получает код для вывода текстового значения"""
+    if result == '6':
+        print('Пока')
 
 def check_lastname() -> str | None:
     while True:
