@@ -1,4 +1,4 @@
-from view import (get_response_num, show_notification)
+from view import (get_response_num, show_notification, check_lastname, check_firstname, show_contact)
 from model import (open_file, is_contact_in_contacts, get_contact, add_contact, get_contacts_and_indexes, delete_contact)
 
 toggle = True
@@ -6,25 +6,25 @@ while toggle:
     result = get_response_num()
     if result == '6':
         show_notification(result)
-        break
+        toggle = False
+
+    if result == '1':
+        contact_list = open_file()
+        show_contact(contact_list)
+        continue
+
+    if result == '2':
+        last_name = check_lastname(True)
+        if last_name == '1':
+            continue
+
+        first_name = check_firstname()
 
 
 
 
 
 
-
-
-    # if not response_num.isdigit():
-    #     print('Выбор пункта меню должен состоять только из цифр!')
-    #     continue
-    #
-    # if response_num == '6':
-    #     print('Пока')
-    #     break
-    #
-    # elif response_num == '1':
-    #     print(open_file())
     #
     # elif response_num == '2':
     #

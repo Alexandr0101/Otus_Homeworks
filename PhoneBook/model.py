@@ -1,5 +1,5 @@
 def open_file() -> list[str]:
-    """open file or create and open file"""
+    """Открывает файл или создаёт новый"""
     with open('/Users/alex/OTUS/Homeworks/PhoneBook/Contacts.txt', 'a+') as f:
         f.seek(0)
         return f.readlines()
