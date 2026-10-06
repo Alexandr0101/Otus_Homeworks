@@ -1,5 +1,10 @@
-from view import (get_response_num, show_notification, check_lastname, check_firstname, show_contact)
-from model import (open_file, is_contact_in_contacts, get_contact, add_contact, get_contacts_and_indexes, delete_contact)
+from view import (get_response_num, show_notification,
+                  check_lastname, check_firstname, check_phone_num,
+                  show_contact, select_contact)
+
+from model import (open_file, is_contact_in_contacts,
+                   get_contact, add_contact, change_contact,
+                   delete_contact, Contact)
 
 toggle = True
 while toggle:
@@ -18,55 +23,68 @@ while toggle:
         if last_name == '1':
             continue
 
-        first_name = check_firstname()
+        first_name = check_firstname(True)
+        if first_name == '1':
+            continue
+
+        check_contact = is_contact_in_contacts(last_name, first_name)
+        if check_contact:
+            show_notification('C', last_name=last_name, first_name=first_name)
+            continue
+
+        phone_num = check_phone_num(True)
+        if phone_num == '1':
+            continue
+
+        new_contact = Contact(last_name, first_name, phone_num)
+
+        show_notification('E', last_name, first_name)
+        continue
+
+    if result == '3':
+        last_name = check_lastname(True)
+        if last_name == '1':
+            continue
+
+        first_name = check_firstname(True)
+        if first_name == '1':
+            continue
+
+        result = get_contact(last_name, first_name)
+
+        if len(result) == 0:
+            show_notification('G', last_name, first_name)
+            continue
+
+        show_contact(result)
+
+    if result == '4':
+        contact_list = open_file()
+
+        index_contact = select_contact(contact_list)
+        if index_contact == '0':
+            continue
+
+        last_name = check_lastname(True)
+        if last_name == '1':
+            continue
+
+        first_name = check_firstname(True)
+        if first_name == '1':
+            continue
+
+        phone_num = check_phone_num(True)
+        if phone_num == '1':
+            continue
+
+        final = change_contact(index_contact, last_name, first_name, phone_num)
+        if final == 'OK':
+            show_notification('H', first_name = first_name, last_name = last_name, phone_num = phone_num)
+        else:
+            show_notification('I')
 
 
 
-
-
-
-    #
-    # elif response_num == '2':
-    #
-    #     lastname = check_lastname()
-    #     if lastname is None:
-    #         continue
-    #
-    #     firstname = check_firstname()
-    #     if firstname is None:
-    #         continue
-    #
-    #     check_contact = is_contact_in_contacts(lastname, firstname)
-    #     if check_contact == True:
-    #         print(f'Контакт {lastname} {firstname} уже существует')
-    #         continue
-    #
-    #     phonenum = check_phone_num()
-    #     if phonenum is None:
-    #         continue
-    #
-    #     result = add_contact(lastname, firstname, phonenum)
-    #     print(f'Контакт {lastname} {firstname} успешно добавлен')
-    #
-    # elif response_num == '3':
-    #     lastname = check_lastname()
-    #     if lastname is None:
-    #         continue
-    #
-    #     firstname = check_firstname()
-    #     if firstname is None:
-    #         continue
-    #
-    #     result = get_contact(lastname, firstname)
-    #
-    #     if len(result) == 0:
-    #         print(f'Контакта {lastname} {firstname} не существует')
-    #         continue
-    #
-    #     print(get_contact(lastname, firstname))
-    #
-    # elif response_num == '4':
-    #     show_contacts = get_contacts_and_indexes()
     #     if show_contacts is None:
     #         continue
     #
