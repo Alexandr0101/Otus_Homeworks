@@ -9,6 +9,9 @@ class Contact:
     def __repr__(self) -> str:
         return f'{self.last_name} {self.first_name} {self.phone_num}'
 
+    def to_file(self):
+        return f"{self.last_name} {self.first_name} {self.phone_num}"
+
 
 def open_file() -> list[str]:
     """Открывает файл или создаёт новый"""
@@ -35,11 +38,11 @@ def get_contact(lastname : str, firstname: str) -> list[str]:
 
 def add_contact(contact: Contact):
     file = open_file()
-    file.append(f'{contact};\n')
+    file.append(f'{contact.to_file()}\n')
     with open('/Users/alex/OTUS/Homeworks/PhoneBook/Contacts.txt', 'w') as f:
         f.writelines(file)
 
-def change_contact(index: int, last_name: str, first_name: str, phone_num: str ):
+def change_contact(index: int, last_name: str, first_name: str, phone_num: str ) -> str:
     result = open_file()
     result[index] = f'{last_name} {first_name} {phone_num}\n'
     with open('/Users/alex/OTUS/Homeworks/PhoneBook/Contacts.txt', 'w') as f:
@@ -47,40 +50,13 @@ def change_contact(index: int, last_name: str, first_name: str, phone_num: str )
     return 'OK'
 
 
-def delete_contact():
+def delete_contact(real_index: int):
     result = open_file()
-    for index, line in enumerate(result):
-        print(index + 1, line)
-    real_index = 0
-    while True:
-        check_num = input('Введи номер строки или 0 для выхода: ')
-        if check_num == '0':
-            return None
+    del result[real_index]
+    with open('/Users/alex/OTUS/Homeworks/PhoneBook/Contacts.txt', 'w') as f:
+        f.writelines(result)
 
-        if not check_num.isdigit():
-            print('Номер строки должен состоять только из цифр!')
-            continue
+    return 'OK'
 
-        real_index = int(check_num) - 1
-        if real_index > len(result) - 1:
-            print(f'Номера строки {check_num} не существует!')
-            continue
-        break
-
-    while True:
-        response = input(f'Точно хочешь удалить контакт {result[real_index]} ?'
-                         f'Введи 1 для удаления или 2 для выхода')
-
-        if response == '2':
-            return None
-
-
-        if response == '1':
-            deleted_contact = result[real_index]
-            del result[real_index]
-            with open('/Users/alex/OTUS/Homeworks/PhoneBook/Contacts.txt', 'w') as f:
-                f.writelines(result)
-            return  f'Контакт {deleted_contact} удалён!'
-
-        print('Введи 1 или 2!')
-        continue
+def get_contact_string(index:int) -> str:
+    return open_file()[index]

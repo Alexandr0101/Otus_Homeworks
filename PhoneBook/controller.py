@@ -1,16 +1,16 @@
 from view import (get_response_num, show_notification,
                   check_lastname, check_firstname, check_phone_num,
-                  show_contact, select_contact)
+                  show_contact, select_contact, is_delete_contact)
 
 from model import (open_file, is_contact_in_contacts,
                    get_contact, add_contact, change_contact,
-                   delete_contact, Contact)
+                   delete_contact, get_contact_string, Contact)
 
 toggle = True
 while toggle:
     result = get_response_num()
     if result == '6':
-        show_notification(result)
+        show_notification('AA')
         toggle = False
 
     if result == '1':
@@ -37,7 +37,7 @@ while toggle:
             continue
 
         new_contact = Contact(last_name, first_name, phone_num)
-
+        add_contact(new_contact)
         show_notification('E', last_name, first_name)
         continue
 
@@ -83,19 +83,15 @@ while toggle:
         else:
             show_notification('I')
 
+    if result == '5':
+        contact_list = open_file()
+        index_contact = select_contact(contact_list)
+        contact_string = get_contact_string(index_contact)
+        user_response = is_delete_contact(contact_string)
 
+        if user_response == '1':
+            delete_contact(index_contact)
+            show_notification('J', full_contact = contact_string)
 
-    #     if show_contacts is None:
-    #         continue
-    #
-    #     print(f'Контакт изменён на {show_contacts}')
-    #
-    # elif response_num == '5':
-    #     deleted_contact = delete_contact()
-    #     if deleted_contact is None:
-    #         continue
-    #
-    #     print(deleted_contact)
-    #
-    # else:
-    #     print(f'Ошибочный ввод: "{response_num}". Такого пункта меню не существует!')
+        else:
+            continue

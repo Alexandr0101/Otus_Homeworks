@@ -21,25 +21,22 @@ def get_response_num() -> str:
 def show_contact(contact_list: list) -> None:
     print(contact_list)
 
-def show_notification(result: str, last_name='', first_name='', phone_num = '') -> None:
+def show_notification(result: str, last_name='', first_name='', phone_num = '', full_contact: str = '' ) -> None:
     """Получает код для вывода текстового значения"""
-    if result == '6':
+    if result == 'AA':
         print('Пока')
 
     if result == 'A':
-        print('Фамилия должна состоять только из букв!'
-              'Введи фамилию или 1 для выхода')
+        print('Фамилия должна состоять только из букв!')
 
     if result == 'B':
-        print('Имя должно состоять только из букв!'
-              'Введи имя или 1 для выхода')
+        print('Имя должно состоять только из букв!')
 
     if result == 'C':
         print(f'Контакт {last_name} {first_name} уже существует')
 
     if result == 'D':
-        print('Номер телефона должен состоять только из цифр!'
-              'Введи номер или 1 для выхода')
+        print('Номер телефона должен состоять только из цифр!')
 
     if result == 'E':
         print(f'Контакт {last_name} {first_name} успешно добавлен')
@@ -52,6 +49,9 @@ def show_notification(result: str, last_name='', first_name='', phone_num = '') 
 
     if result == 'I':
         print('Что-то пошло не так')
+
+    if result == 'J':
+        print(f'Контакт {full_contact} успешно удалён!')
 
 def check_lastname(toggle) -> str:
     while toggle:
@@ -111,3 +111,10 @@ def select_contact(contact_list: list[str]) -> int | str:
             continue
 
         return real_index
+
+def is_delete_contact(full_contact : str) -> str:
+    result = input(f'Точно удалить контакт {full_contact} ?'
+                   f'Для подстверждения введи 1'
+                   f'Для для отмены введи 2')
+    return result
+
