@@ -86,6 +86,8 @@ while toggle:
     if result == '5':
         contact_list = open_file()
         index_contact = select_contact(contact_list)
+        if index_contact == '0':
+            continue
         contact_string = get_contact_string(index_contact)
         user_response = is_delete_contact(contact_string)
 

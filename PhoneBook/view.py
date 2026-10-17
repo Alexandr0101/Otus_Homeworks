@@ -1,7 +1,7 @@
 
 
 def get_response_num() -> str:
-    """Выводит главное меню в консоль и возвращает значение от пользователя"""
+    """Выводит главное меню в консоль и возвращает значение введённое пользователем"""
     toggle = True
     while toggle:
         response_num = input("""Привет:) Добро пожаловать в телефонный справочник!
@@ -10,8 +10,7 @@ def get_response_num() -> str:
         Найти контакт -> введи 3:  
         Изменить контакт -> введи 4:  
         Удалить контакт -> введи 5: 
-        Для выхода -> введи 6: 
-        """)
+        Для выхода -> введи 6: """)
         if not response_num.isdigit():
             print('Выбор пункта меню должен состоять только из цифр!')
             continue
@@ -19,10 +18,11 @@ def get_response_num() -> str:
         return response_num
 
 def show_contact(contact_list: list) -> None:
+    """Печатает список контактов"""
     print(contact_list)
 
 def show_notification(result: str, last_name='', first_name='', phone_num = '', full_contact: str = '' ) -> None:
-    """Получает код для вывода текстового значения"""
+    """Получает символьный код уведомления и печатает его на экран"""
     if result == 'AA':
         print('Пока')
 
@@ -53,7 +53,10 @@ def show_notification(result: str, last_name='', first_name='', phone_num = '', 
     if result == 'J':
         print(f'Контакт {full_contact} успешно удалён!')
 
-def check_lastname(toggle) -> str:
+def check_lastname(toggle: bool) -> str:
+    """Проверяет, что фамилия это строка и возвращает её
+    Возвращает 1 при необходимости выхода
+    """
     while toggle:
         lastname = input('Введи фамилию или 1 для выхода')
 
@@ -67,6 +70,9 @@ def check_lastname(toggle) -> str:
         return lastname
 
 def check_firstname(toggle) -> str | None:
+    """Проверяет, что имя строка и возвращает его
+    Возвращает 1 при необходимости выхода
+    """
     while toggle:
         first_name = input('Введи имя или 1 для выхода')
 
@@ -80,6 +86,9 @@ def check_firstname(toggle) -> str | None:
         return first_name
 
 def check_phone_num(toggle) -> str | None:
+    """Проверяет, что номер телефона это строка из числовых символов и возвращает его
+    Возвращает 1 при необходимости выхода
+    """
     while toggle:
         phone_num = input('Введи номер телефона или 1 для выхода')
 
@@ -92,6 +101,9 @@ def check_phone_num(toggle) -> str | None:
         return phone_num
 
 def select_contact(contact_list: list[str]) -> int | str:
+    """Печатает строки контактов с номером строки, валидирует на цифры,
+    переводит номер строки в индекс и возвращает его.
+    Возвращает 0 при необходимости выхода"""
     for index, line in enumerate(contact_list):
         print(index + 1, line)
 
@@ -113,8 +125,9 @@ def select_contact(contact_list: list[str]) -> int | str:
         return real_index
 
 def is_delete_contact(full_contact : str) -> str:
+    """Запрашивает подтверждение удаления и возвращает 2 либо 1 для выхода"""
     result = input(f'Точно удалить контакт {full_contact} ?'
-                   f'Для подстверждения введи 1'
+                   f'Для подтверждения введи 1'
                    f'Для для отмены введи 2')
     return result
 
